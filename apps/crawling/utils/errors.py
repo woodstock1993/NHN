@@ -43,4 +43,23 @@ class UrlNotFoundError(ErrorResponse):
             self.STATUS_CODE,
             self.SYSTEM_CODE,
             self.SYSTEM_MSG,
+        )
+
+
+class FuncNotFound(APIException):
+    status_code = status.HTTP_404_NOT_FOUND
+    default_detail = "Input url is not matched with function"
+    default_code = "FUNC_NOT_FOUND"
+
+
+class FuncNotFoundError(ErrorResponse):
+    STATUS_CODE = status.HTTP_404_NOT_FOUND
+    SYSTEM_CODE = "FUNC_NOT_FOUND"
+    SYSTEM_MSG = "Input url is not matched with function"
+
+    def __init__(self):
+        super().__init__(
+            self.STATUS_CODE,
+            self.SYSTEM_CODE,
+            self.SYSTEM_MSG,
         )    
