@@ -2,11 +2,11 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 class UrlTarget(models.TextChoices):
-    IAMSCHOOL_1 = "https://school.iamservice.net/organization/1674/group/2001892", _("아이엠스쿨1")
-    IAMSCHOOL_2 = "https://school.iamservice.net/organization/19710/group/2091428", _("아이엠스쿨2")
-    BLOG_1 = 'https://blog.naver.com/PostList.nhn?blogId=sntjdska123&from=postList&categoryNo=51', _("성남시블로그")
-    BLOG_2 = 'https://blog.naver.com/PostList.nhn?blogId=hellopolicy&from=postList&categoryNo=168', _("정부블로그")
-    BBC = 'http://feeds.bbci.co.uk/news/rss.xml', _("BBC")
+    iam_school_1 = "https://school.iamservice.net/organization/1674/group/2001892", _("아이엠스쿨1")
+    iam_school_2 = "https://school.iamservice.net/organization/19710/group/2091428", _("아이엠스쿨2")
+    blog_1 = 'https://blog.naver.com/PostList.nhn?blogId=sntjdska123&from=postList&categoryNo=51', _("성남시블로그")
+    blog_2 = 'https://blog.naver.com/PostList.nhn?blogId=hellopolicy&from=postList&categoryNo=168', _("정부블로그")
+    bbc = 'http://feeds.bbci.co.uk/news/rss.xml', _("BBC")
 
 
 class FuncTarget(models.TextChoices):
@@ -18,7 +18,8 @@ class FuncTarget(models.TextChoices):
 
 
 class Url(models.Model):
-    url = models.URLField(max_length=512, null=False)
+    name = models.CharField(max_length=32, null=False)
+    url = models.URLField(primary_key=True, max_length=512, null=False)
     created = models.DateTimeField(auto_now_add=True, verbose_name="생성일")
 
     class  Meta:
@@ -39,4 +40,4 @@ class Post(models.Model):
     )
 
     class Meta:
-        db_table = 'post'    
+        db_table = 'post'

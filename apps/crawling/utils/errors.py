@@ -62,4 +62,4 @@ class FuncNotFoundError(ErrorResponse):
             self.STATUS_CODE,
             self.SYSTEM_CODE,
             self.SYSTEM_MSG,
-        )    
+        )
