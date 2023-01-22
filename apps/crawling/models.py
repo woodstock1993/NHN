@@ -30,8 +30,8 @@ class Post(models.Model):
     title = models.CharField(max_length=64, verbose_name="게시글 제목")
     created = models.DateTimeField(auto_now_add=True, verbose_name="생성일")
     published_datetime = models.DateTimeField(null=True, blank=True, verbose_name="출판일")
-    body = models.TextField(verbose_name="HTML")
-    attachment_list = models.JSONField(verbose_name="파일 이름")
+    body = models.TextField(verbose_name="HTML", blank=True)
+    attachment_list = models.JSONField(verbose_name="파일 이름", null=True)
     url = models.ForeignKey(
         Url,
         related_name="post",

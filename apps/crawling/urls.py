@@ -1,7 +1,6 @@
-from django.urls import path, include
+from django.urls import path
 from . import views
 from . import views
-from rest_framework.routers import DefaultRouter
 
 
 urlpatterns = [
@@ -24,5 +23,20 @@ urlpatterns = [
         'yongin/<int:num>',
         views.YonginGetAPIView.as_view(),
         name='youngin'
-    )
+    ),
+    path(
+        'seong-nam/<int:num>',
+        views.SeongNamGetAPIView.as_view(),
+        name='seong-nam'
+    ),
+    path(
+        'gov/<int:num>',
+        views.GovernmentGetAPIView.as_view(),
+        name='gov'
+    ),
+    path(
+        'bbc/<int:num>',
+        views.BBCGetAPIView.as_view(),
+        name='bbc'
+    ),
 ]

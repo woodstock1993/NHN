@@ -82,13 +82,47 @@ class board(APIView):
             url_obj=Url.objects.get(url=url)          
             pd = datetime.strptime(p_d, "%Y.%m.%d")                        
             Post.objects.update_or_create(title=title, published_datetime=pd, body=body, attachment_list=a_l, url=url_obj)
-            logging.info("Crawling Succeed")
+        logging.info("Elementary Crawling Succeed")
 
+    @transaction.atomic
     def blog(self, url):
-        pass
+        self.driver.get(url)
 
-    def bbc(self, url):
-        pass
+        req = driver.page_source
+        soup = BP(req, 'html.parser')
+
+        titles = soup.find_all('strong', {'class':'ell'}, limit=10)
+        published_datetime = soup.find_all('span', {'class':'date'}, limit=10)
+
+        url_obj = Url.objects.get(url=url)
+
+        for i in range(len(titles)):
+            title = titles[i].text
+            p_d = published_datetime[i].text.replace(" ", "").rstrip('.')
+            pd = datetime.strptime(p_d, "%Y.%m.%d")
+            Post.objects.update_or_create(title=title, published_datetime=pd, url=url_obj)
+
+        logging.info('Blog Crawling Succeed')
+
+    @transaction.atomic
+    def bbc(self, url):        
+        self.driver.get(url)
+
+        req = driver.page_source
+        soup = BP(req, 'html.parser')
+
+        titles = soup.find_all('a', {'class':'item'}, limit=10)
+        bodies = soup.find_all('div', {'id':'item'}, limit=10)
+
+        url_obj = Url.objects.get(url=url)
+        
+        for i in range(len(bodies)):
+            body = str(bodies[i].select_one("div"))
+            title = titles[i].text
+            Post.objects.update_or_create(title=title, body=body, url=url_obj)
+
+        logging.info("BBC Crawling Succeed")        
+
 
     def func_exec(self, url):
         check = False
@@ -118,7 +152,16 @@ class board(APIView):
 
     @swagger_auto_schema(        
         operation_summary="크롤링",
-        operation_description="크롤링 후 해당 결과값이 DB에 없을 시 새로운 데이터 생성",
+        operation_description="""
+        ## <font size=5> 크롤링 후 해당 결과값이 DB에 없을 시 새로운 데이터 생성 </font>
+        ### <font size=4> URL 목록 </font>
+         - ### 용인초등학교: https://school.iamservice.net/organization/1674/group/2001892
+         - ### 수내초등학교: https://school.iamservice.net/organization/19710/group/2091428
+         - ### 성남시: https://blog.naver.com/PostList.nhn?blogId=sntjdska123&from=postList&categoryNo=51
+         - ### 정부: https://blog.naver.com/PostList.nhn?blogId=hellopolicy&from=postList&categoryNo=168
+         - ### bbc: http://feeds.bbci.co.uk/news/rss.xml
+        ---        
+        """,
         request_body=UrlSerializer,
         responses={
             status.HTTP_200_OK: None,
@@ -155,7 +198,7 @@ class UrlCreateDeleteAPIView(APIView):
             """,
         responses={
             status.HTTP_200_OK: None,
-            status.HTTP_201_CREATED : OriginUrlSerializer,            
+            status.HTTP_201_CREATED : OriginUrlSerializer,
         }
     )
     def post(self, request, *args, **kwargs):
@@ -201,10 +244,56 @@ class YonginGetAPIView(APIView):
     operation_summary="용인초등학교",
     operation_description="""
         용인초등학교 크로링 결과 데이터 조회
-        """,        
+        """,
+        responses={status.HTTP_201_CREATED : PostSerialzer,}
     )
     def get(self, request, *args, **kwargs):
         num = kwargs.get('num')
         queryset = Post.objects.filter(url=UrlTarget.iam_school_2.value)[:num]
+        res = PostSerialzer(queryset, many=True)
+        return Response(res.data, status=status.HTTP_200_OK)
+
+
+class SeongNamGetAPIView(APIView):
+    @swagger_auto_schema(
+    operation_summary="성남시",
+    operation_description="""
+        성남시 크로링 결과 데이터 조회
+        """,
+        responses={status.HTTP_201_CREATED : PostSerialzer,}
+    )
+    def get(self, request, *args, **kwargs):
+        num = kwargs.get('num')
+        queryset = Post.objects.filter(url=UrlTarget.blog_1.value)[:num]
+        res = PostSerialzer(queryset, many=True)
+        return Response(res.data, status=status.HTTP_200_OK)
+
+
+class GovernmentGetAPIView(APIView):
+    @swagger_auto_schema(
+    operation_summary="정부",
+    operation_description="""
+        정부 크로링 결과 데이터 조회
+        """,
+        responses={status.HTTP_201_CREATED : PostSerialzer,}
+    )
+    def get(self, request, *args, **kwargs):
+        num = kwargs.get('num')
+        queryset = Post.objects.filter(url=UrlTarget.blog_2.value)[:num]
+        res = PostSerialzer(queryset, many=True)
+        return Response(res.data, status=status.HTTP_200_OK)
+
+
+class BBCGetAPIView(APIView):
+    @swagger_auto_schema(
+    operation_summary="BBC",
+    operation_description="""
+        BBC 크로링 결과 데이터 조회
+        """,
+        responses={status.HTTP_201_CREATED : PostSerialzer,}
+    )
+    def get(self, request, *args, **kwargs):
+        num = kwargs.get('num')
+        queryset = Post.objects.filter(url=UrlTarget.bbc.value)[:num]
         res = PostSerialzer(queryset, many=True)
         return Response(res.data, status=status.HTTP_200_OK)
