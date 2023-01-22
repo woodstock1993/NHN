@@ -9,7 +9,7 @@ $ chrome://settings/help -> Check your local Chrome Version
 
 ## Chrome Driver
 ```
-https://chromedriver.chromium.org/downloads -> Install ChromeDriver fits to local Chrome Version
+https://chromedriver.chromium.org/downloads -> Install ChromeDriver fits to local Chrome Version and Match to You OS
 ```
 
 # 목차
