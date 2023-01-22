@@ -22,7 +22,7 @@ https://chromedriver.chromium.org/downloads -> Install ChromeDriver fits to loca
 ```
 $ git clone 'this repository'
 $ python -m venv venv
-$ source venv/Scripts/activate
+$ source venv/bin/activate
 $ python install -r requirements.txt
 $ python manage.py runserver
 ```
