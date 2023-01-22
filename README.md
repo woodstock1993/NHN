@@ -4,14 +4,14 @@
 
 ## Chrome Version
 ```
-$ chrome://settings/help -> Check your local Chrome Version
+$ chrome://settings/help -> 로컬 머신에 깔려 있는 크롬 버전 확인
 ```
 
 ## Chrome Driver
 ```
-https://chromedriver.chromium.org/downloads -> Install ChromeDriver fits to local Chrome Version and Match to You OS
+https://chromedriver.chromium.org/downloads -> 로컬 머신의 크롬 버전과 OS에 맞는 크롬 드라이버 다운로드
 
-pip install -r requirements.txt 하기 전 돌리고자 하는 로컬 머신의 크롬 버전에 맞는 selenium을 선행해서 다운로드 -> 미설치 에러 발생
+pip install -r requirements.txt 설치 전 윗 단계 반드시 선행 -> 크롬드라이버 미설치 후 진행 시 에러 발생
 ```
 
 # 목차
@@ -20,7 +20,7 @@ pip install -r requirements.txt 하기 전 돌리고자 하는 로컬 머신의 
 - [API 명세](#api-명세)
 
 
-## Install Application
+## Install Application(MAC OS)
 ```
 $ git clone https://github.com/woodstock1993/NHN.git
 $ python -m venv venv
