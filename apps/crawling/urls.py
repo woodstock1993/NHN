@@ -16,8 +16,13 @@ urlpatterns = [
         name='url-post'
     ),
     path(
-        'iam_school_1/<int:num>',
-        views.IamSchool_1APIView.as_view(),
-        name='iam-school-1'
+        'sunae/<int:num>',
+        views.SunaeGetAPIView.as_view(),
+        name='sunae'
+    ),
+    path(
+        'yongin/<int:num>',
+        views.YonginGetAPIView.as_view(),
+        name='youngin'
     )
 ]

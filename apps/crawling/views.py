@@ -44,7 +44,7 @@ class board(APIView):
         return url_obj.name
         
     @transaction.atomic
-    def iam_school_1(self, url):
+    def iam_school(self, url):
         self.driver.get(url)
 
         published_date_arr = []
@@ -82,39 +82,29 @@ class board(APIView):
             url_obj=Url.objects.get(url=url)          
             pd = datetime.strptime(p_d, "%Y.%m.%d")                        
             Post.objects.update_or_create(title=title, published_datetime=pd, body=body, attachment_list=a_l, url=url_obj)
-    
-    def iam_school_2(self, url):
-        pass
+            logging.info("Crawling Succeed")
 
-    def blog_1(self, url):
-        pass
-
-    def blog_2(self, url):
+    def blog(self, url):
         pass
 
     def bbc(self, url):
         pass
 
     def func_exec(self, url):
-        func_name = self.url_match_to_func(url)
-        for key, value in FuncTarget.__members__.items():
-            if func_name == value and func_name=='iam_school_1':
-                self.iam_school_1(url)
-                break
-            elif func_name == value and func_name=='iam_school_2':
-                self.iam_school_2(url)
-                break
-            elif func_name == value and func_name=='blog_1':
-                self.blog_1(url)
-                break
-            elif func_name == value and func_name=='blog_2':
-                self.blog_2(url)
-                break
-            elif func_name == value and func_name=='bbc':
-                self.bbc(url)
-                break
-            else:
-                raise FuncNotFound
+        check = False
+        func_name = self.url_match_to_func(url)        
+        if func_name==FuncTarget.IAMSCHOOL_1.value or func_name==FuncTarget.IAMSCHOOL_2.value:
+            self.iam_school(url)
+            check = True
+        elif func_name==FuncTarget.BLOG_1.value or func_name==FuncTarget.BLOG_2.value:
+            self.blog(url)
+            check = True
+        elif func_name==FuncTarget.BBC.value:
+            self.bbc(url)
+            check = True
+        if check is True:
+            return
+        raise FuncNotFound
     
     @swagger_auto_schema(
         operation_summary="크롤링",
@@ -192,15 +182,29 @@ class UrlCreateDeleteAPIView(APIView):
         return Response({"All Url Objects are deleted"}, status=status.HTTP_200_OK)
 
 
-class IamSchool_1APIView(APIView):
+class SunaeGetAPIView(APIView):
     @swagger_auto_schema(
     operation_summary="수내초등학교",
     operation_description="""
-        수내 초등학교 크로링 결과 데이터 조회
+        수내초등학교 크로링 결과 데이터 조회
         """,        
     )
     def get(self, request, *args, **kwargs):
         num = kwargs.get('num')
         queryset = Post.objects.filter(url=UrlTarget.iam_school_1.value)[:num]
+        res = PostSerialzer(queryset, many=True)
+        return Response(res.data, status=status.HTTP_200_OK)
+
+
+class YonginGetAPIView(APIView):
+    @swagger_auto_schema(
+    operation_summary="용인초등학교",
+    operation_description="""
+        용인초등학교 크로링 결과 데이터 조회
+        """,        
+    )
+    def get(self, request, *args, **kwargs):
+        num = kwargs.get('num')
+        queryset = Post.objects.filter(url=UrlTarget.iam_school_2.value)[:num]
         res = PostSerialzer(queryset, many=True)
         return Response(res.data, status=status.HTTP_200_OK)
