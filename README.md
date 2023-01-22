@@ -2,7 +2,7 @@
 
 <div align="center"><img src="https://image.rocketpunch.com/company/518/imcompany_logo_1531806392.png?s=400x400&t=inside"/></div>
 
-## Chrome Version(109.0.5414.87)
+## Chrome Version
 ```
 $ chrome://settings/help -> Check your local Chrome Version
 ```
