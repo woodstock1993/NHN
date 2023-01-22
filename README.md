@@ -11,7 +11,7 @@ $ chrome://settings/help -> Check your local Chrome Version
 ```
 https://chromedriver.chromium.org/downloads -> Install ChromeDriver fits to local Chrome Version and Match to You OS
 
-pip install -r requirements.txt 하기 전 돌리고자 하는 로컬 머신의 크롬 버전에 맞는 selenium을 선행해서 다운로드 해야 한다. 그렇지 않을 경우 에러발생
+pip install -r requirements.txt 하기 전 돌리고자 하는 로컬 머신의 크롬 버전에 맞는 selenium을 선행해서 다운로드 -> 미설치 에러 발생
 ```
 
 # 목차
@@ -22,7 +22,7 @@ pip install -r requirements.txt 하기 전 돌리고자 하는 로컬 머신의 
 
 ## Install Application
 ```
-$ git clone 'this repository'
+$ git clone https://github.com/woodstock1993/NHN.git
 $ python -m venv venv
 $ source venv/bin/activate
 $ pip install --upgrade pip
