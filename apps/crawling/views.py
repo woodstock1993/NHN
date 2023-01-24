@@ -18,7 +18,7 @@ from .utils.errors import (
     FuncNotFound, FuncNotFoundError,    
 )
 
-class board(APIView):
+class Board(APIView):
     """
     입력 URL 크롤링 후 데이터 생성 및 데이터 조회
 
@@ -76,7 +76,7 @@ class board(APIView):
                 temp.append(attach.text)
             
             title=titles[i].text
-            body= bodies[i].text
+            body= str(bodies[i])            
             p_d= published_date_arr[i].text
             a_l=temp
             url_obj=Url.objects.get(url=url)          
@@ -155,8 +155,8 @@ class board(APIView):
         operation_description="""
         ## <font size=5> 크롤링 후 해당 결과값이 DB에 없을 시 새로운 데이터 생성 </font>
         ### <font size=4> URL 목록 </font>
-         - ### 용인초등학교: https://school.iamservice.net/organization/1674/group/2001892
-         - ### 수내초등학교: https://school.iamservice.net/organization/19710/group/2091428
+         - ### 수내초등학교: https://school.iamservice.net/organization/1674/group/2001892
+         - ### 용인초등학교: https://school.iamservice.net/organization/19710/group/2091428
          - ### 성남시: https://blog.naver.com/PostList.nhn?blogId=sntjdska123&from=postList&categoryNo=51
          - ### 정부: https://blog.naver.com/PostList.nhn?blogId=hellopolicy&from=postList&categoryNo=168
          - ### bbc: http://feeds.bbci.co.uk/news/rss.xml
@@ -181,7 +181,7 @@ class board(APIView):
         url_obj = Url.objects.get(url=url)
         queryset = Post.objects.filter(url=url_obj)[:10]
         res = PostSerialzer(queryset, many=True)
-        return Response(data=res.data, status=status.HTTP_200_OK)
+        return Response(data=res.data, status=status.HTTP_201_CREATED)
 
 
 class UrlCreateDeleteAPIView(APIView):
