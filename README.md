@@ -39,7 +39,8 @@ $ python manage.py runserver
 $ python manage.py test apps.crawling
 ```
 
-<img width="514" alt="image" src="https://user-images.githubusercontent.com/67543838/214263249-8c73bbe3-c65e-431d-8462-6956d11fd0f2.png">
+<img width="603" alt="image" src="https://user-images.githubusercontent.com/67543838/214264608-818a244f-641c-44b7-aaec-d2cd48cad2ab.png">
+
 
 ## API 명세
 ```
