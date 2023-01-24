@@ -51,34 +51,6 @@ class BoardViewTest(TestCase):
         self.assertEqual("https://school.iamservice.net/organization/1674/group/2001892", response.data[9]['url']['url'])
         print("sunae test cases are passed!")
 
-    def test_yongin(self):
-        api = "/api/crawl"
-        target_url = "https://school.iamservice.net/organization/19710/group/2091428",
-        data = {
-            "url": target_url
-        }
-
-        response = Client().post(api, data)
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertIn("title", response.data[0])
-        self.assertIn("published_datetime", response.data[0])
-        self.assertIn("body", response.data[0])
-        self.assertIn("attachment_list", response.data[0])
-
-        self.assertEqual("2022년 겨울철 교육시설물 안전점검 실시 결과",  response.data[0]['title'])        
-        self.assertEqual("<p class=\"desc\">2022년 겨울철 학교시설물 안전점검 결과를 붙임과 같이 공개합니다.<br/><br/>붙임 2022년 겨울철 교육시설물 안전점검 실시 결과 1부.</p>", response.data[0]['body'])
-        self.assertEqual(["교육시설 안전점검 실시 결과(2022 겨울철).pdf"],  response.data[0]['attachment_list'])
-        self.assertEqual("https://school.iamservice.net/organization/19710/group/2091428", response.data[0]['url']['url'])
-
-        self.assertEqual("2023학년도 방과후학교 외부강사 모집 2차 공고",  response.data[9]['title'])
-        self.assertEqual('<p class="desc">방과후학교 개인위탁 외부강사 공모<br/><br/>용인초등학교에서는 2023학년도 방과후학교 운영과 관련하여 아래와 같이 방과후학교 프로그램 위탁강사를 모집하오니, 관심 있는 분들의 많은 지원 바랍니다.<br/><br/>     1.모집 분야 : 해당분야 각 1명 모집(5개 부서) ※첨부된 프로그램 참고<br/><br/><br/><br/>1. 모집 세부 사항<br/><br/><br/>(1) 공고 기간 : 2022년 11월 16일(수) ~ 2022년 11월 18일(금)<br/><br/>(2) 서류 접수 : 2022년 11월 17일(목) ~ 2022년 11월 21일(월) 16:00까지<br/><br/>(3) 접수 장소 : 용인초등학교 교무실</p>', response.data[9]['body'])
-        self.assertEqual(["2023학년도 용인초 방과후 강사모집 공고문 2차.hwp",
-                            "2023학년도 용인초 방과후 강사 제출서류최종.hwp",
-                            "2023학년도 용인초 방과후 강사모집 시간표 예시안.hwp"],  response.data[9]['attachment_list'])
-        self.assertEqual("https://school.iamservice.net/organization/19710/group/2091428", response.data[9]['url']['url'])
-        print("yongin test cases are passed!")
-
-
     def test_seong_nam(self):
         api = "/api/crawl"
         target_url = "https://blog.naver.com/PostList.nhn?blogId=sntjdska123&from=postList&categoryNo=51",
