@@ -11,16 +11,20 @@ $ chrome://settings/help -> 로컬 머신에 깔려 있는 크롬 버전 확인
 ```
 https://chromedriver.chromium.org/downloads -> 로컬 머신의 크롬 버전과 OS에 맞는 크롬 드라이버 다운로드
 
+NHN/chromedriver -> 크롬 드라이버 다운 시 설치 경로
+
 pip install -r requirements.txt 설치 전 윗 단계 반드시 선행 -> 크롬드라이버 미설치 후 진행 시 에러 발생
 ```
 
 # 목차
 
 - [Install](#Install)
+- [Test](#Test)
 - [API 명세](#api-명세)
 
 
-## Install Application(MAC OS)
+## Install
+#### MAC OS
 ```
 $ git clone https://github.com/woodstock1993/NHN.git
 $ python -m venv venv
@@ -30,6 +34,12 @@ $ python install -r requirements.txt
 $ python manage.py runserver
 ```
 
+## Test
+```
+$ python manage.py test apps.crawling
+```
+
+<img width="514" alt="image" src="https://user-images.githubusercontent.com/67543838/214263249-8c73bbe3-c65e-431d-8462-6956d11fd0f2.png">
 
 ## API 명세
 ```
@@ -64,7 +74,7 @@ You can see url objects are created in database
 ```
 Click Execute button with data
 
-sending data loos like below
+sending data looks like below
 
 {
   "url": "https://school.iamservice.net/organization/1674/group/2001892"
