@@ -102,35 +102,35 @@ sending data looks like below
 <img width="1428" alt="image" src="https://user-images.githubusercontent.com/67543838/213925857-52ba2e6a-fa02-4ee0-a12d-fd727fd1f857.png">
 
 ```
-해당 url은 수내초등학교에서 크롤링 된 결과물에 적은 숫자에 해당하는 객체를 반환
+해당 url은 수내초등학교에서 크롤링 된 결과물에 적은 숫자 개수만큼 객체를 반환
 ```
 
 ### yongin
 <img width="1431" alt="image" src="https://user-images.githubusercontent.com/67543838/213925888-e96636b4-c46c-4f46-9652-0f539648c9b6.png">
 
 ```
-해당 url은 용인초등학교에서 크롤링 된 결과물에 적은 숫자에 해당하는 객체를 반환
+해당 url은 용인초등학교에서 크롤링 된 결과물에 적은 숫자 개수만큼 해당하는 객체를 반환
 ```
 
 ### seoong-nam
 <img width="1430" alt="image" src="https://user-images.githubusercontent.com/67543838/213925912-0276c8c8-0314-4740-93e1-d30823fc72b2.png">
 
 ```
-해당 url은 성남시 블로그에서 크롤링 된 결과물에 적은 숫자에 해당하는 객체를 반환
+해당 url은 성남시 블로그에서 크롤링 된 결과물에 적은 숫자 개수만큼 해당하는 객체를 반환
 ```
 
 ### gov
 <img width="1432" alt="image" src="https://user-images.githubusercontent.com/67543838/213925939-3bc9f904-555e-4b18-92d3-9ad2e3895495.png">
 
 ```
-해당 url은 정부 블로그에서 크롤링 된 결과물에 적은 숫자에 해당하는 객체를 반환
+해당 url은 정부 블로그에서 크롤링 된 결과물에 적은 숫자 개수만큼 해당하는 객체를 반환
 ```
 
 ### bbc
 <img width="1428" alt="image" src="https://user-images.githubusercontent.com/67543838/213925969-a6af82c4-4f8f-4ffd-b9d5-20c6f952877a.png">
 
 ```
-해당 url은 bbc에서 크롤링 된 결과물에 적은 숫자에 해당하는 객체를 반환
+해당 url은 bbc에서 크롤링 된 결과물에 적은 숫자 개수만큼 해당하는 객체를 반환
 ```
 
 ## 기술 스택
