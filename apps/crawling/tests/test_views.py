@@ -3,7 +3,6 @@ from rest_framework import status
 from ..models import Url, Post
 
 
-
 class BoardViewTest(TestCase):
     @classmethod
     def setUp(cls):        
@@ -133,4 +132,4 @@ class BoardViewTest(TestCase):
 
     def tearDown(self):
         Post.objects.all().delete()
-        Url.objects.all().delete()
+        Url.objects.all().delete()        
